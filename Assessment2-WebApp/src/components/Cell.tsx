@@ -25,14 +25,11 @@ export default function Cell({
   const handleClick = () => {
     if (clickTimer.current) {
       clearTimeout(clickTimer.current);
-      clickTimer.current = null;
-      onDoubleClick();
-      return;
     }
     clickTimer.current = setTimeout(() => {
       clickTimer.current = null;
       onClick();
-    },50);
+    }, 50);
   };
 
   const [mounted, setMounted] = useState(false);
@@ -45,7 +42,8 @@ export default function Cell({
   return (
     <div
       onClick={handleClick}
-      className={`cursor-pointer rounded-sm transition-all duration-[100ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 active:scale-90 ${
+      onDoubleClick={onDoubleClick}
+      className={`cursor-pointer rounded-[2px] transition-all duration-[50ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 active:scale-90 ${
         mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
       }`}
       style={{
@@ -54,7 +52,7 @@ export default function Cell({
         boxShadow: isError
           ? '0 0 0 4px #FF6B6B, 0 0 24px rgba(255, 107, 107, 0.6)'
           : isSelected
-          ? '0 0 0 4px #FFFFFF, 0 0 30px rgba(255, 255, 255, 0.5)'
+          ? '0 0 0 6px #FFFFFF, 0 0 40px rgba(255, 255, 255, 0.6)'
           : isInMatch
             ? '0 0 0 2px rgba(255, 215, 0, 0.5), 0 0 12px rgba(255, 215, 0, 0.2)'
             : '0 4px 12px rgba(0,0,0,0.4)',

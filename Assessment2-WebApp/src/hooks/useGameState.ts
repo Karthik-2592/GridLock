@@ -165,7 +165,6 @@ function processPostAction(state: GameState): GameState {
   const matches = detectMatches(grid);
 
   if (rows === 0 || cols === 0) isEnding = 'won';
-  else if (rows === 1 && cols === 1) isEnding = 'won';
 
   return { ...state, grid, cost, rows, cols, status, matches, moveCost, isEnding };
 }
@@ -299,7 +298,6 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       let newStatus: GameStatus = state.status;
       let newEnding: 'won' | 'lost' | null = state.isEnding;
       if (newRows === 0 || newCols === 0) newEnding = 'won';
-      else if (newRows === 1 && newCols === 1) newEnding = 'won';
 
       return {
         ...state,
@@ -343,7 +341,7 @@ export function useGameState() {
 
   useEffect(() => {
     if (state.isEnding) {
-      const delay = state.isEnding === 'lost' ? 1200 : 400;
+      const delay = 600;
       const timer = setTimeout(() => {
         dispatch({ type: 'COMPLETE_GAME', status: state.isEnding! });
       }, delay);

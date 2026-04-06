@@ -72,8 +72,8 @@ export const DIFFICULTY_CONFIGS: Record<Difficulty, DifficultyConfig> = {
     maxCols: 9,
     threshold: 12,
     paletteSize: 6,
-    recolorCost: 1,
-    moveCost: 2,
+    recolorCost: 3,
+    moveCost: 1,
   },
   hard: {
     startRows: 6,
@@ -82,8 +82,8 @@ export const DIFFICULTY_CONFIGS: Record<Difficulty, DifficultyConfig> = {
     maxCols: 8,
     threshold: 10,
     paletteSize: 6,
-    recolorCost: 1,
-    moveCost: 2,
+    recolorCost: 3,
+    moveCost: 1,
   },
 };
 

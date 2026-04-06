@@ -161,77 +161,77 @@ Changes:
 - An entire row / column filling should have a unique indicator (instead of the current golden-highlight)
 
 ---
-In types.ts Currently only recolor Cost is configurable. Add another entry to GameState which inclues moveCost:number. This should determine the cost increase for swap operation done in useGameState.ts.
----
+
+## In types.ts Currently only recolor Cost is configurable. Add another entry to GameState which inclues moveCost:number. This should determine the cost increase for swap operation done in useGameState.ts.
+
 Space out the UI components in GameBoard.tsx
 and scale each of them respectively. Ensure that the detectMatches() in useGameState.ts
 handles the case where one of the dimensions is 2 or less.
 
-Also win condition is that all rows be deleted and not to reduce to 1x1 grid.
----
+## Also win condition is that all rows be deleted and not to reduce to 1x1 grid.
 
 Before gameover screen, complete the final swap animation and pressure meter build up.
 
 Also debug the swap cells operation for swapping between rows. (Current implementation affects entire rows when swapping, instead of 2 cells).
 
-Finally, check whether 2 cell pairing is done when one of the grid dimensions is 2 (currently not present).
----
+## Finally, check whether 2 cell pairing is done when one of the grid dimensions is 2 (currently not present).
 
 Minor changes:
+
 - When grid size transitions from 2x() or ()x2 to a larger size, remove the 2 pair checking. (Current implemenation highlights the previous 2 pair check after size increase, but not any new 2 pairs)
 - Reduce the animation time to 50ms
 - Sharper borders to each cell (
 - Win/loss screen to appear in 0.6s (current delay is 1.5a)
 
 Minor Changes:
+
 - Expansion should occurs after the pressure bar fills ups, (Current logic expands concurrently, which is not ideal)
 - Cell size is constant when screen size is large, and is dynamic when window size is small
 - Stronger highlight on selected cell (wider, white border is preferred)
 
 Minor Changes:
+
 - When window width is less than window height, realign the gameBoard to be vertically aligned instead of horizontal
-	- Infocards arranged horizontally above the grid 
-	- Grid between Pressure bar and Inforcards
-	- Pressure bar is horizontal below the grid
+  - Infocards arranged horizontally above the grid
+  - Grid between Pressure bar and Inforcards
+  - Pressure bar is horizontal below the grid
 - When window width is higher than window height, realign the gameBoard to be horizontally aligned instead of vertical
-	- Infocards arranged vertically right of the grid 
-	- Grid between Pressure bar and Inforcards
-	- Pressure bar is vertical left of the grid
+  - Infocards arranged vertically right of the grid
+  - Grid between Pressure bar and Inforcards
+  - Pressure bar is vertical left of the grid
 
 Changes:
+
 - Remove the isExpanding:bool logic that delays expansion animation and all its associated components completely.
 - Add Difficulty to the game
 
 Easy:
-Beginning: 4x4 Grid 
+Beginning: 4x4 Grid
 Dead-Zone: 10x10 Grid
 MaxPressure: 15
 
-Medium: 
-Beginning: 5x5 Grid 
+Medium:
+Beginning: 5x5 Grid
 Dead-Zone: 9x9 Grid
 MaxPressure: 12
 
-Beginning: 6x6 Grid 
+Beginning: 6x6 Grid
 Dead-Zone: 8x8 Grid
 MaxPressure: 10
 
-
 - Include a animated how to play section in the bottom of starting page:
-	1. Swap and Recolor operations
-	2. Pressue meter and Grid expansion
-	3. Matching mechanics: Pressure reduction and grid reduction
-	4. DeadZone - loss condition
-	5. Grid clearing - loss condition.
-	- Carousal of cards that can be navigated.
-- Visible dead-zones 
-	- low opacity red border indicating the dead-zone visually.
+  1.  Swap and Recolor operations
+  2.  Pressue meter and Grid expansion
+  3.  Matching mechanics: Pressure reduction and grid reduction
+  4.  DeadZone - loss condition
+  5.  Grid clearing - loss condition.
+  - Carousal of cards that can be navigated.
+- Visible dead-zones
+  - low opacity red border indicating the dead-zone visually.
 
+Reconfigure the handleClick() eventListener to include the following changes:
 
+1. Delay between clicking and highlight should be 50ms
+2. Double click should be checked independently (currently double click is handled by the same function which handles single click)
 
-
-
-
-
-
-
+The idea is to reduce the delay for highlight animation (by reducing the timeout to 50ms) but this means that double click should be registered within that 50ms window, which is not possible. Separate these (with possible individual event handlers) for recolor operation.

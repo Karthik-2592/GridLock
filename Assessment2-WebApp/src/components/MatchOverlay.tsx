@@ -23,12 +23,12 @@ export default function MatchOverlay({ match, gridRows, gridCols, onConfirm }: M
     (match.direction === 'row' && match.length === gridCols) ||
     (match.direction === 'col' && match.length === gridRows);
 
-  const overlayBg = isUniform ? 'rgba(167, 139, 250, 0.15)' : 'rgba(255, 215, 0, 0.12)';
-  const overlayBorder = isUniform ? '2px solid rgba(167, 139, 250, 0.6)' : '2px solid rgba(255, 215, 0, 0.35)';
+  const overlayBg = isUniform ? 'rgba(167, 139, 250, 0.2)' : 'rgba(255, 215, 0, 0.12)';
+  const overlayBorder = isUniform ? '3px dashed #A78BFA' : '2px solid rgba(255, 215, 0, 0.35)';
 
   return (
     <div
-      className="pointer-events-none absolute rounded-sm animate-fade-in"
+      className={`pointer-events-none absolute rounded-sm animate-fade-in ${isUniform ? 'animate-pulse' : ''}`}
       style={{
         top,
         left,
@@ -36,7 +36,7 @@ export default function MatchOverlay({ match, gridRows, gridCols, onConfirm }: M
         height,
         backgroundColor: overlayBg,
         border: overlayBorder,
-        boxShadow: isUniform ? '0 0 20px rgba(167, 139, 250, 0.3)' : 'none',
+        boxShadow: isUniform ? '0 0 30px rgba(167, 139, 250, 0.4)' : 'none',
         zIndex: 10,
       }}
     >

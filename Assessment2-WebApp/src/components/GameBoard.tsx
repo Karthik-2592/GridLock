@@ -27,7 +27,7 @@ export default function GameBoard({ state, selectCell, recolorCell, confirmMatch
 
   return (
     <div
-      className={`flex ${isPortrait ? 'flex-col' : 'flex-row'} items-center justify-center gap-12 sm:gap-22 px-4 sm:px-16 animate-fade-in`}
+      className={`flex ${isPortrait ? 'flex-col' : 'flex-row'} items-center justify-center gap-16 sm:gap-32 px-4 sm:px-24 mb-12 animate-fade-in`}
     >
       {/* Cost Bar */}
       <div className={`${isPortrait ? 'order-3' : 'order-1'}`}>
@@ -71,13 +71,13 @@ function InfoCard({ label, value, accent }: { label: string; value: string; acce
     accent === 'danger' ? '#FF6B6B' : accent === 'gold' ? '#FFD700' : '#7AFFC4';
   return (
     <div
-      className="rounded-2xl px-6 py-4 text-center"
-      style={{ backgroundColor: '#1A1B23', border: '1px solid #22232E' }}
+      className="rounded-[20px] px-8 py-5 text-center transition-transform hover:scale-105"
+      style={{ backgroundColor: '#1A1B23', border: '2px solid #22232E', minWidth: '120px' }}
     >
-      <div className="text-xs font-medium" style={{ color: '#8892A4' }}>
+      <div className="text-xs font-black uppercase tracking-widest" style={{ color: '#8892A4', marginBottom: 4 }}>
         {label}
       </div>
-      <div className="text-2xl font-bold" style={{ color }}>
+      <div className="text-3xl font-black" style={{ color, letterSpacing: '-1px' }}>
         {value}
       </div>
     </div>
