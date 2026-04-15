@@ -241,7 +241,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       const current = newGrid[row][col].color;
       let next = randomColor(state.paletteSize);
       let attempts = 0;
-      while (next === current && attempts < 10) {
+      while (next === current && attempts < 2) {
         next = randomColor(state.paletteSize);
         attempts++;
       }
@@ -330,9 +330,7 @@ export function useGameState() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
   const startGame = useCallback((difficulty: Difficulty) => dispatch({ type: 'START_GAME', difficulty }), []);
-  const selectCell = useCallback((row: number, col: number) => {
-    dispatch({ type: 'SELECT_CELL', row, col });
-  }, []);
+  const selectCell = useCallback((row: number, col: number) => dispatch({ type: 'SELECT_CELL', row, col }), []);
   const recolorCell = useCallback((row: number, col: number) => dispatch({ type: 'RECOLOR_CELL', row, col }), []);
   const confirmMatch = useCallback((matchIndex: number) => dispatch({ type: 'CONFIRM_MATCH', matchIndex }), []);
   const clearError = useCallback(() => dispatch({ type: 'CLEAR_ERROR' }), []);

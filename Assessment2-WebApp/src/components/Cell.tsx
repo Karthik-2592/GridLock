@@ -1,5 +1,5 @@
 import type { CellData } from '../types';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 interface CellProps {
   cell: CellData;
@@ -20,20 +20,8 @@ export default function Cell({
   onDoubleClick,
   style
 }: CellProps) {
-  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleClick = () => {
-    if (clickTimer.current) {
-      clearTimeout(clickTimer.current);
-    }
-    clickTimer.current = setTimeout(() => {
-      clickTimer.current = null;
-      onClick();
-    }, 50);
-  };
 
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     const animationFrame = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(animationFrame);
@@ -41,7 +29,7 @@ export default function Cell({
 
   return (
     <div
-      onClick={handleClick}
+      onClick={onClick}
       onDoubleClick={onDoubleClick}
       className={`cursor-pointer rounded-[2px] transition-all duration-[300ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 active:scale-90 ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
         }`}
